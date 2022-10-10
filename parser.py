@@ -13,8 +13,8 @@ print(links)
 warnings.filterwarnings("ignore")
 
 
-def download_phrase_videos():
-    data = "data"
+def download_phrase_videos(download_folder, parse_single_character=True):
+    data = download_folder
 
     for link in tqdm(links):
         req = requests.get(link)
@@ -23,17 +23,24 @@ def download_phrase_videos():
         dirname = link.split("/")[-2]
         os.mkdir(f"{data}/{dirname}")
 
-        soup = soup.find_all("div", attrs={"id": "gallery-0"})[0]
+        if parse_single_character:
+            soup = soup.find_all("div", attrs={"id": "gallery-0"})[0]
+        else:
+            soup = soup.find_all("div", attrs={"id": "gallery-1"})[0]
 
         for el in soup.find_all("div", attrs={"class": "wikia-gallery-item"}):
-            name = el.find_all("div", attrs={"class": "lightbox-caption"})[0].text.replace("/", "_")
-            image_link = el.find_all("img", attrs={"class": "thumbimage"})[0]["src"]
-            print(name, image_link)
+            try:
+                name = el.find_all("div", attrs={"class": "lightbox-caption"})[0].text.replace("/", "_")
+                image_link = el.find_all("img", attrs={"class": "thumbimage"})[0]["src"]
+                print(name, image_link)
 
-            res = requests.get(image_link, stream=True)
+                res = requests.get(image_link, stream=True)
 
-            if res.status_code == 200:
-                with open(f"{data}/{dirname}/{name}.png", 'wb') as f:
-                    shutil.copyfileobj(res.raw, f)
+                if res.status_code == 200:
+                    with open(f"{data}/{dirname}/{name}.png", 'wb') as f:
+                        shutil.copyfileobj(res.raw, f)
+            except IndexError:
+                print("Fucked Up")
 
-download_phrase_videos()
+
+download_phrase_videos("scenes_data", False)

@@ -1,0 +1,6 @@
+bs4
+opencv-python
+denoising_diffusion_pytorch
+torch
+torchvision
+matplotlib
