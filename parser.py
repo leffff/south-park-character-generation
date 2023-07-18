@@ -40,7 +40,7 @@ def download_phrase_videos(download_folder, parse_single_character=True):
                     with open(f"{data}/{dirname}/{name}.png", 'wb') as f:
                         shutil.copyfileobj(res.raw, f)
             except IndexError:
-                print("Fucked Up")
+                print("Error")
 
 
 download_phrase_videos("scenes_data", False)
