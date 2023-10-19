@@ -12,6 +12,8 @@ My South Park character generator
 2) [VAE](https://github.com/leffff/south-park-character-generation/blob/main/VAE.ipynb)
 3) [Flow Matching with ODEs](https://github.com/leffff/south-park-character-generation/blob/main/models/flow_matching_ODE.ipynb)
 4) [Flow Matching with SDEs](https://github.com/leffff/south-park-character-generation/blob/main/models/flow_matching_SDE.ipynb)
+5) [DDPM](https://github.com/leffff/south-park-character-generation/blob/main/models/diffusion.ipynb)
+
 
 </br>
 
