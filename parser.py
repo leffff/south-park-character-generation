@@ -14,6 +14,8 @@ warnings.filterwarnings("ignore")
 
 
 def download_phrase_videos(download_folder, parse_single_character=True):
+    os.mkdir(download_folder)
+
     data = download_folder
 
     for link in tqdm(links):
@@ -43,4 +45,4 @@ def download_phrase_videos(download_folder, parse_single_character=True):
                 print("Error")
 
 
-download_phrase_videos("scenes_data", False)
+download_phrase_videos("single_character_data", True)
